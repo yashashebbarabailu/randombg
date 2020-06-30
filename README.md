@@ -6,8 +6,7 @@ Showing random bg for set interval (Default 60 sec).
 
 ---
 CSS Framework - Bulma CSS
-
-JS Library - JQuery
+JS Library - JQuery, Axios
 
 ---
 Random Image from
