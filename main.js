@@ -1,6 +1,8 @@
 function loadImage(url, tries) {
-	if (tries == undefined)
+	if (tries == undefined) {
 		tries = 0;
+		clearInterval(timer);
+	}
 	if (tries == 3)
 		throw "Image loading retry failed"
 
@@ -12,6 +14,7 @@ function loadImage(url, tries) {
 			console.debug("Image loaded");
 			$(this).remove();
 			$(".bg").css("background-image", `url(${url})`);
+			timer = startInterval();
 		})
 		.on('error', () => {
 			$(this).remove();
@@ -50,18 +53,20 @@ async function randomBG(tries) {
 		}
 	}
 }
-
+let timer;
 function restartInterval(handle) {
 	console.debug("timeout change");
 	clearInterval(handle);
+	return startInterval();
+}
+function startInterval() {
 	return setInterval(randomBG, Number($("#timeout").val()) * 1000);
 }
-
 $(window).on("load", () => {
 	console.debug("Started");
 	randomBG();
 
-	let timer = setInterval(randomBG, 60000);
+	timer = setInterval(randomBG, 60000);
 
 	$("#timeout").val(60000 / 1000);
 
