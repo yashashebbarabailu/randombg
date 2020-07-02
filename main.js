@@ -54,6 +54,8 @@ async function randomBG(tries) {
 	}
 }
 let timer;
+const defaultInterval = 10000;
+
 function restartInterval(handle) {
 	console.debug("timeout change");
 	clearInterval(handle);
@@ -66,9 +68,9 @@ $(window).on("load", () => {
 	console.debug("Started");
 	randomBG();
 
-	timer = setInterval(randomBG, 60000);
+	timer = setInterval(randomBG, defaultInterval);
 
-	$("#timeout").val(60000 / 1000);
+	$("#timeout").val(defaultInterval / 1000);
 
 	$("#timeout").on("change", () => {
 		console.debug("Timeout changed");
